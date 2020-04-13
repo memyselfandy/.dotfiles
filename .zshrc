@@ -1,21 +1,24 @@
-# Aliases
-alias python=python3
-alias pip=pip3
-
-
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/mranderson/.oh-my-zsh"
-export PROMPT='${ret_status} %{$fg[magenta]%}%n at %{$fg[yellow]%}%m %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="randyrussel"
+ ZSH_THEME="aphrodite"
+# Copied and modified from the oh-my-zsh theme from geoffgarside, jispwoso,
+# # daveverwer 
+# # yellow username/server name, magenta cwd, blue git status
+#
+#PROMPT='%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%}:%{$fg[magenta]%}%c%{$reset_color%}$(git_prompt_info) %(!.#.$) '
+#
+#ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[blue]%}("
+#ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+#ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}%{$reset_color%}"
+#ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -77,11 +80,12 @@ ZSH_THEME="randyrussel"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  bundler
   dotenv
-  zsh-autosuggestions)
+)
 
 source $ZSH/oh-my-zsh.sh
-source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
