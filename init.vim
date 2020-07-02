@@ -19,7 +19,22 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes' 
 Plug 'vifm/vifm.vim'
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NerdTree config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore = []
+let g:NERDTreeStatusLine = ''
+
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabFree()) | q | endif
+
+nnoremap <silent> <C-b> :NERDTreeToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mouse Scrolling
@@ -46,3 +61,19 @@ set encoding=utf-8
 let mapleader = ','
 set title
 color dracula
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Terminal mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+set splitright
+set splitbelow
+
+tnoremap <Esc> <C-\><C-n>
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
+function! OpenTerminal()
+  split term://bash
+  resize 10
+endfunction
+
+nnoremap <c-n> :call OpenTerminal()<CR>
