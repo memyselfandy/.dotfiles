@@ -2,30 +2,47 @@
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged')
-Plug 'lervag/vimtex'
-let g:vimtex_compiler_progname = 'nvr'
-let g:tex_flavor='latex'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
-Plug 'sirver/ultisnips'
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 Plug 'joshdick/onedark.vim'
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes' 
 Plug 'vifm/vifm.vim'
-Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
+Plug 'Raimondi/delimitMate'
+Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
+Plug 'ncm2/ncm2'                             
+Plug 'roxma/nvim-yarp'
+Plug 'gaalcaras/ncm-R'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" NerdTree config
+" Keys
 """""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Leader
+let mapleader = ","
+let g:mapleader = ","
+let maplocalleader = "\\"
+
+
+" Tabs & Navigation
+map <leader>tn :tabnew<cr>      " To create a new tab.
+map <leader>to :tabonly<cr>     " To close all other tabs (show only the current tab).
+map <leader>tc :tabclose<cr>    " To close the current tab.
+map <leader>tm :tabmove<cr>     " To move the current tab to next position.
+map <leader>nt :tabn<cr>        " To swtich to next tab.
+map <leader>tp :tabp<cr>        " To switch to previous tab.
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" NerdTree
+
+map <leader>nt :NERDTreeToggle<CR>
 
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
@@ -34,33 +51,59 @@ let g:NERDTreeStatusLine = ''
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabFree()) | q | endif
 
-nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+" NCM2
+"autocmd BufEnter * call ncm2#enable_for_buffer()    " To enable ncm2 for all buffers.
+"set completeopt=noinsert,menuone,noselect           " :help Ncm2PopupOpen for more
+                                                    " information.
+
+
+" NVIM-R
+
+let R_assign = 0    " disable: `_` replacement by `<-`
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" Mouse Scrolling
+" Editor settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" General
+set wildmenu
+set encoding=utf-8
+set title
 set mouse=nicr
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" File Handling
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-set noswapfile
-set nobackup
+" Files & Backup
+set nobackup                     " Turn off backup.
+set nowb                         " Don't backup before overwriting a file.
+set noswapfile                   " Don't create a swap file.
+set ffs=unix,dos,mac             " Use Unix as the standard file type.
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Editor
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+" Line Numbers & Indentation
+set backspace=indent,eol,start  " To make backscape work in all conditions.
+set ma                          " To set mark a at current cursor location.
+set expandtab                   " To enter spaces when tab is pressed.
+set smarttab                    " To use smart tabs.
+set autoindent                  " To copy indentation from current line 
+                                " when starting a new line.
+set si                          " To switch on smart indentation.
 set number
+
+" Colors and Fonts 
 set colorcolumn=80
 set cursorcolumn
 set cursorline
-set wildmenu
 syntax enable
-set encoding=utf-8
-let mapleader = ','
-set title
 color dracula
+
+" Brackets
+set showmatch                   " To show matching brackets when text indicator 
+                                " is over them.
+set mat=2                       " How many tenths of a second to blink 
+                                " when matching brackets.
+
+" Return to last edit position when opening files
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Terminal mode
