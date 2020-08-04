@@ -1,4 +1,5 @@
 path+=('/home/mranderson/.local/bin')
+path+=('/home/linuxbrew/.linuxbrew/bin')
 export PATH
 alias pip=pip3
 alias r=radian
