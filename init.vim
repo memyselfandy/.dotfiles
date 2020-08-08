@@ -4,6 +4,7 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'dracula/vim', {'as': 'dracula'}
+Plug 'arcticicestudio/nord-vim'
 Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes' 
@@ -93,7 +94,7 @@ set colorcolumn=80
 set cursorcolumn
 set cursorline
 syntax enable
-color dracula
+color nord
 
 " Brackets
 set showmatch                   " To show matching brackets when text indicator 
