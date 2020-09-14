@@ -4,6 +4,7 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'dracula/vim', {'as': 'dracula'}
+Plug 'arcticicestudio/nord-vim'
 Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes' 
@@ -15,6 +16,9 @@ Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
 Plug 'ncm2/ncm2'                             
 Plug 'roxma/nvim-yarp'
 Plug 'gaalcaras/ncm-R'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -50,7 +54,7 @@ let g:NERDTreeIgnore = []
 let g:NERDTreeStatusLine = ''
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabFree()) | q | endif
-
+nnoremap <silent> <C-b> :NERDTreeToggle<CR>
 " NCM2
 "autocmd BufEnter * call ncm2#enable_for_buffer()    " To enable ncm2 for all buffers.
 "set completeopt=noinsert,menuone,noselect           " :help Ncm2PopupOpen for more
@@ -61,16 +65,34 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 let R_assign = 0    " disable: `_` replacement by `<-`
 
+" FZF
+nnoremap <C-p> :FZF<CR>
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit'
+\}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
+"COC
+let g:coc_global_extensions = ['coc-emmet','coc-css','coc-html','coc-json','coc-prettier','coc-tsserver']
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editor settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " General
 set wildmenu
-set encoding=utf-8
+set encoding=utf8
 set title
 set mouse=nicr
+set t_Co=256
+let base16colorspace=256
+set ruler
+set ttyfast
+set enc=utf-8
 
 " Files & Backup
 set nobackup                     " Turn off backup.
@@ -81,10 +103,9 @@ set ffs=unix,dos,mac             " Use Unix as the standard file type.
 " Line Numbers & Indentation
 set backspace=indent,eol,start  " To make backscape work in all conditions.
 set ma                          " To set mark a at current cursor location.
+set tabstop=2
+set shiftwidth=2
 set expandtab                   " To enter spaces when tab is pressed.
-set smarttab                    " To use smart tabs.
-set autoindent                  " To copy indentation from current line 
-                                " when starting a new line.
 set si                          " To switch on smart indentation.
 set number
 
@@ -93,7 +114,7 @@ set colorcolumn=80
 set cursorcolumn
 set cursorline
 syntax enable
-color dracula
+colorscheme nord
 
 " Brackets
 set showmatch                   " To show matching brackets when text indicator 
@@ -115,8 +136,23 @@ tnoremap <Esc> <C-\><C-n>
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
 function! OpenTerminal()
-  split term://bash
-  resize 10
+  split term://zsh
+  resize 15
 endfunction
 
 nnoremap <c-n> :call OpenTerminal()<CR>
+
+" Use alt+hjkl to move between split/vsplit
+tnoremap <A-h> <C-\><C-n><C-w>w
+tnoremap <A-j> <C-\><C-n><C-j>w
+tnoremap <A-k> <C-\><C-n><C-k>w
+tnoremap <A-l> <C-\><C-n><C-l>w
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
+
+" Devicon Settings
+let g:webdevicons_enable=1
+let g:webdevicons_enable_nerdtree=1
