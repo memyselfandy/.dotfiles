@@ -31,4 +31,4 @@ ufw allow OpenSSH
 ufw enable
 
 # Disable root login
-sudo passwd dl root
+passwd dl root
