@@ -21,6 +21,46 @@ Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
+At first I too didn't understand what needs to be done to get this nice looking toolbar. Yes I know about the README and other stuff, but I think there should be a getting started or minimum settings section in the help file.
+
+Anyway here are the settings.
+
+Installing the appropriate fonts
+You need to install fonts into your system with symbols like branching, big triangles etc. They are not standard symbols so you need to install a patched font. You can find a lot of patched fonts here: https://github.com/powerline/fonts.
+
+.vimrc settings
+From :help airline-customization, place this code into your .vimrc file:
+
+" air-line
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Keys
 """""""""""""""""""""""""""""""""""""""""""""""""""""
